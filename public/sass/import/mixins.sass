@@ -1,0 +1,30 @@
+@import constants.sass
+
+// MISC
+=hidden-text
+  :display block
+  :text-indent -2000em
+  :z-index 1000
+
+=buttonize
+  :margin 0px 10px
+  :background= !blue_2
+  :padding 6px 20px
+  :color= !blue_4
+  :text-decoration none
+  &:hover
+    :background= !blue_3
+    :color= !blue_5
+// HACKS
+
+=ie_double_margin
+  /* ie_hack : double margins
+  :_display inline
+  
+=ie_expanding_box
+  /* ie_hack : expanding box, 'width' needed!
+  :_overflow hidden
+
+=ie_has_layout
+  /* ie_hack : hasLayout (width or height)
+  :_width 1px

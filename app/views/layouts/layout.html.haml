@@ -1,0 +1,40 @@
+!!! Transitional
+%html{html_attrs}
+  %head!= render :partial => "layouts/head"
+  %body
+    #root
+      
+      -# HEADER
+      #header
+        %h1#logo
+          %a{:href => root_path, :title => "Crawlr title"} Crawlr title
+        %h2 Put your tagline here
+        
+        %a#rss{:href => galleries_rss_url(params[:tag], 'rss'), :rel => 'nofollow', :title => 'Grab our feed!'} Rss Feed
+      %hr
+      
+      -# NAVIGATION
+        #nav{:class => params[:type]}
+          %ul
+            -render_tabs('photos')
+        %hr
+      
+      -# TAGS
+      #tags
+        -for tag in @tags
+          -if @current_tag == tag
+            %h2
+              %strong= tag.name
+              %span.count= "(#{tag[:galleries_count]})"
+          -else
+            %h2
+              %a{:href => galleries_index_path(tag.name), :title => tag.name}= tag.name
+              %span.count= "(#{tag[:galleries_count]})"
+      %hr
+      .clearer
+      #content
+        !=yield
+      %hr
+      != render :partial => "layouts/footer"
+    
+    != render :partial => "layouts/scripts"

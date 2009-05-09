@@ -1,0 +1,28 @@
+-if @num_pages > 1
+  #paginate
+    / PREV
+    -if @current_page == 1
+      %span.nextprev « Previous
+    -else
+      %a.nextprev{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => @current_page-1), :title => "Back to the previous page"} « Previous
+    / FIRST
+    -if @first
+      %a{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => 1), :title => "Go to page 1"}= 1
+      %a{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => 2), :title => "Go to page 2"}= 2
+      %span …
+    / MIDDLE
+    -for i in @first_window..@last_window
+      -if i == @current_page
+        %span.current= i
+      -else
+        %a{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => i), :title => "Go to page #{i}"}= i
+    / LAST
+    -if @last
+      %span …
+      %a{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => @num_pages-1), :title => "Go to page #{@num_pages-1}"}= @num_pages-1
+      %a{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => @num_pages), :title => "Go to page #{@num_pages}"}= @num_pages
+    / NEXT
+    -if @current_page == @num_pages
+      %span.nextprev Next »
+    -else
+      %a.nextprev{:href => galleries_index_path(:type => params[:type], :tag => params[:tag], :page => @current_page+1), :title => "Visit next page"} Next »

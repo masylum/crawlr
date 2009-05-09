@@ -1,0 +1,25 @@
+#galleries
+  -@galleries.each do |gallery| 
+    .gallery{:id => "gallery_#{gallery.id}"}
+      %a{:href => galleries_show_path(gallery), :title => gallery.name, :target => '_blank', :rel => 'nofollow'}<= gallery.name.capitalize
+      
+      %a.thumb{:href => galleries_show_path(gallery), :title => gallery.name, :target => '_blank', :rel => 'nofollow'}<
+        %img{:src => get_thumbnail(gallery), :alt => gallery.name, :width => CON::THUMB_WIDTH, :height => CON::THUMB_HEIGHT}
+        
+      .votes
+        -# milk
+        -if is_milked?(gallery)
+          %span.vote.milked milked
+        -else
+          %a.vote.milkit{:href => galleries_update_path(:tag => params[:tag], :page => params[:page], :id => gallery), :title => 'Vote this!'} vote it!
+        %span.num= gallery.total_votes
+        -# report
+        -if is_reported?(gallery)
+          %span.vote.reported reported
+        -else
+          %a.vote.reportit{:href => galleries_destroy_path(:tag => params[:tag], :page => params[:page], :id => gallery), :title => "Report this gallery if you think it's ilegal or offensive"}< report
+          
+      .description
+        != truncate(gallery.description, 120, "...")
+        
+  != render :partial => 'paginate'

@@ -1,0 +1,3 @@
+class Milk < Vote
+  
+end
