@@ -11,6 +11,10 @@ Rails::Initializer.run do |config|
     :session_key => '_crawlr_session',
     :secret      => '34d4debd0fa3368dc68e03116b643ba98e376bf9cb7e806c6ee162ce15258a2664b05fc85de112c20f1278669a5ec665e1f87b3fb7eb6c35fd070c5b54d54c04'
   }
+  
+  config.gem 'rmagick'
+  config.gem 'hpricot'
+  config.gem 'haml'
   # config.action_controller.page_cache_directory = "#{RAILS_ROOT}/public/cache"
   # config.cache_store = :file_store, "#{RAILS_ROOT}/tmp/cache"
   # config.action_controller.session_store = :active_record_store
