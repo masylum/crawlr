@@ -1,10 +1,9 @@
 :ruby: ree
 :application: crawlr
 :user: rails
-:group: rails
 :time_zone: UTC
 :deploy_to: /srv/crawlr
-#:domain: yourapp.com
+:domain: yourapp.com
 #:domain_aliases:
 #  - assets1.yourapp.com
 #  - assets2.yourapp.com
