@@ -1,70 +1,0 @@
-/*
-Sass::SyntaxError: Undefined mixin 'hidden-text'.
-on line 39 of /Users/masylum/www/crawlr/public/sass/import/global.sass
-
-35:         :font-size 40px
-36:         
-37:       // RSS
-38:       a#rss
-39:         +hidden-text
-40:         :position absolute
-41:         :top 0px
-42:         :right 0px
-43:         :height= !rss_size
-44:         :width= !rss_size
-45:     
-
-
-Backtrace:
-/Users/masylum/www/crawlr/public/sass/import/global.sass:39
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:389:in `parse_mixin_include'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:302:in `parse_line'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:187:in `build_tree'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:237:in `build_tree'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:116:in `render_to_tree'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/engine.rb:88:in `render'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/plugin.rb:65:in `update_stylesheets'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/plugin.rb:53:in `each'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/plugin.rb:53:in `update_stylesheets'
-/Users/masylum/.gem/ruby/1.8/gems/haml-2.0.9/lib/sass/plugin/rails.rb:16:in `process'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/base.rb:392:in `process'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:183:in `handle_request'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:110:in `dispatch_unlocked'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:123:in `dispatch'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `synchronize'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:122:in `dispatch'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:132:in `dispatch_cgi'
-/Users/masylum/.gem/ruby/1.8/gems/actionpack-2.2.2/lib/action_controller/dispatcher.rb:39:in `dispatch'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/request_handler.rb:38:in `process_request'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_request_handler.rb:165:in `main_loop'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/application_spawner.rb:321:in `start_request_handler'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/application_spawner.rb:282:in `handle_spawn_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:163:in `safe_fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:161:in `fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:161:in `safe_fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/application_spawner.rb:280:in `handle_spawn_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:163:in `safe_fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:161:in `fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/utils.rb:161:in `safe_fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/application_spawner.rb:279:in `handle_spawn_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:317:in `__send__'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:317:in `main_loop'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:168:in `start_synchronously'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:135:in `start'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:112:in `fork'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:112:in `start'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/railz/application_spawner.rb:179:in `start'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/spawn_manager.rb:222:in `spawn_rails_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/spawn_manager.rb:217:in `synchronize'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/spawn_manager.rb:217:in `spawn_rails_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/spawn_manager.rb:126:in `spawn_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/spawn_manager.rb:251:in `handle_spawn_application'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:317:in `__send__'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:317:in `main_loop'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/lib/passenger/abstract_server.rb:168:in `start_synchronously'
-/Library/Ruby/Gems/1.8/gems/passenger-2.0.6/bin/passenger-spawn-server:46
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Sass::SyntaxError: Undefined mixin 'hidden-text'.\A on line 39 of /Users/masylum/www/crawlr/public/sass/import/global.sass\A \A 35:         :font-size 40px\A 36:         \A 37:       // RSS\A 38:       a#rss\A 39:         +hidden-text\A 40:         :position absolute\A 41:         :top 0px\A 42:         :right 0px\A 43:         :height= !rss_size\A 44:         :width= !rss_size\A 45:     \A "; }

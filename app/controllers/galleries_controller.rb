@@ -76,7 +76,7 @@ class GalleriesController < ApplicationController
   end
   
   def rss
-    @current_tag = Tag.find_by_name_and_parent_cached(params[:tag], params[:parent])
+    @current_tag = Tag.find_by_name(params[:tag])
     @top_galleries = Gallery.get_all(params[:parent], @current_tag, request, 1)
   end
   

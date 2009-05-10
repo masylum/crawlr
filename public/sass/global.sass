@@ -1,5 +1,283 @@
-// GLOBAL.sass
-@import mixins.sass
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// CONSTANTS //////////////////
+!link = #66AAEE
+!link_h = #AAEEFF
 
-@import reset.sass
-@import global.sass
+!blue_1 = #015756
+!blue_2 = #1A7C7D
+!blue_3 = #289693
+!blue_3_5 = #3AA5A0
+!blue_4 = #85CCC3
+!blue_5 = #CAFFFC
+
+!blue_gray = #4D9793
+
+//FONTS
+!global_font = "Helvetica, Arial, sans"
+
+//SIZES
+!rss_size = 44px
+!global_margin = 20px
+
+!tab_height = 35px
+!tab_width = 75px
+
+!thumb_width = 240px
+!thumb_height = 180px
+
+!votes_width = 29px
+!votes_height = 25px
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// MIXINS //////////////////
+=hidden-text
+  :display block
+  :text-indent -2000em
+  :z-index 1000
+
+// HACKS
+=ie_double_margin
+  /* ie_hack : double margins
+  :_display inline
+  
+=ie_expanding_box
+  /* ie_hack : expanding box, 'width' needed!
+  :_overflow hidden
+
+=ie_has_layout
+  /* ie_hack : hasLayout (width or height)
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// GLOBAL //////////////////
+body
+  :width 100%
+  :height 100%
+  :font
+    :size 62.5%
+    :family= !global_font
+  :background= #000
+  :color #aaa
+
+  // ROOT
+  div#root
+    :width 95%
+    :margin 0% 2.5%
+    :font-size 14px
+
+    // HEADER
+    #header
+      :margin-bottom 30px
+      :margin-top 10px
+      :float left
+      // LOGO
+      h1#logo
+        :float left
+        :margin-right= !global_margin*2
+        a
+          :color #FFFFFF
+          :font-size 72px
+          :line-height 72px
+          :font-weight bold
+      h2
+        :float left
+        :line-height 72px
+        :font-size 40px
+
+      // RSS
+      a#rss
+        +hidden-text
+        :position absolute
+        :top 0px
+        :right 0px
+        :height= !rss_size
+        :width= !rss_size
+
+    // TAGS
+    div#tags
+      :clear left
+      h2
+        :display inline-block
+        :margin 5px 10px
+        :font-size 16px
+      strong
+        :background #fff
+        :color #000
+      span.count
+        :font-size 10px
+        :color #666
+
+    // CONTENT
+    div#content
+      :clear both
+      :float left
+      :width 100%
+
+      // GALLERIES
+      div#galleries
+        :float left
+        :margin-top 50px
+        div.gallery
+          :float left
+          :width= !thumb_width+50px
+          :height 220px
+          :margin 0px 20px 0px 0px
+          :position relative
+          +ie_expanding_box
+          +ie_double_margin
+          &:hover .description
+            :display block
+          a.thumb
+            :float left
+            &:hover
+              :border none
+          div.votes
+            :float left
+            a.vote, span.vote
+              +hidden-text
+              :display block
+              :height= !votes_height
+              :width= !votes_width
+              :margin-left 5px
+              :background url('/images/sprite.png') no-repeat
+            span.num
+              :display block
+              :margin-left 5px
+              :padding 10px 0px
+              :height 12px
+              :text-align center
+            a.vote
+              &:hover
+                :border-bottom none
+                :position relative
+                :top -1px
+
+            // MILK
+            a.milkit
+              :background-position 4px 1px
+            span.milked
+              :background-position -25px 1px
+
+            // REPORT
+            a.reportit
+              :background-position 4px -26px
+            span.reported
+              :background-position -25px -26px
+          .description
+            :clear left
+            :display none
+            :position absolute
+            :top= 141px
+            :height 46px
+            :width= !thumb_width-10px
+            :padding 5px
+            :z-index 2
+            :font-size 11px
+            :line-height 1.4em
+            :text-decoration none
+            :background #111            
+
+      // PAGINATE
+      div#paginate
+        :clear both
+        :font-size 16px
+        :width 100%
+        :text-align center
+        :padding 20px 0
+        span, a
+          :padding 1px 5px
+        span.current
+          :background #fff
+          :color #000
+          :font-weight bold
+
+    // FOOTER
+    div#footer
+      :clear both
+      :height 20px
+
+// -------------------------------------------------------------------------
+// ------------------------------- MISC ------------------------------------
+// -------------------------------------------------------------------------
+a:link, a:visited
+  :text-decoration none
+  :color= !link
+a:hover, a:active
+  :background #111111
+  :border-bottom 1px solid #FFFFFF
+  :color= !link_h
+a:active, a:focus
+  :outline 0
+a img
+  :text-decoration none
+hr
+  :display none
+
+.clearer
+  :clear both
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// RESET //////////////////
+*:link, *:visited
+  :text-decoration none
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td
+  :margin 0pt
+  :padding 0pt
+
+table
+  :border-collapse collapse
+  :border-spacing 0pt
+
+fieldset, img
+  :border 0pt none
+
+address, caption, cite, code, dfn, em, strong, th, var
+  :font-style normal
+  :font-weight normal
+
+ol, ul
+  :list-style-image none
+  :list-style-position outside
+  :list-style-type none
+
+caption, th
+  :text-align left
+
+h1, h2, h3, h4, h5, h6
+  :font-size 100%
+  :font-weight normal
+
+q:before, q:after
+  :content ''
+
+abbr, acronym
+  :border 0pt none
+
+strong
+  :font-weight 700
+
+body
+  :font-family verdana,arial,helvetica,clean,sans-serif
+  :font-style normal
+  :font-variant normal
+  :font-weight normal
+  :line-height normal
+
+table
+  :font-size inherit
+
+pre, code
+  :font-family monospace
+  :font-size 115%
+  :font-style normal
+  :font-variant normal
+  :font-weight normal
+  :line-height normal
+
+body *
+  :line-height 1.22em
+
+body
+  :height 100%
