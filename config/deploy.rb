@@ -1,1 +1,0 @@
-server "masylum", :app, :web, :db, :primary => true

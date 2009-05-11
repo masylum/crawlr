@@ -9,8 +9,8 @@ Rails::Initializer.run do |config|
   config.frameworks -= [:action_mailer ]
   
   config.gem 'rmagick'
-  config.gem 'hpricot'
-  config.gem 'haml'
+  config.gem 'hpricot', :source => "http://code.whytheluckystiff.net"
+  config.gem 'haml', :version => '2.1.0'
   
   config.action_controller.session = { :key => "_crawlr_session", :secret => "zemba is an amazing secret key!swine flu!" }
   # config.action_controller.page_cache_directory = "#{RAILS_ROOT}/public/cache"
