@@ -40,5 +40,5 @@ ActiveRecord::Base.partial_updates = true
 #  Sass::Plugin.options = {:template_location => RAILS_ROOT + "/public/sass",
 #                          :style => :compressed,
 #                          :always_update => true}
-end
+#end
 
