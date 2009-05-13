@@ -32,13 +32,13 @@ end
 ActiveRecord::Base.partial_updates = true
 
 #HAML OPTIONS
-Haml::Template.options = {:escape_html => true,
-                          :ugly => true}
+#Haml::Template.options = {:escape_html => true,
+#                          :ugly => true}
                           
 #SASS OPTIONS
-if ENV['RAILS_ENV'] == 'development'
-  Sass::Plugin.options = {:template_location => RAILS_ROOT + "/public/sass",
-                          :style => :compressed,
-                          :always_update => true}
+#if ENV['RAILS_ENV'] == 'development'
+#  Sass::Plugin.options = {:template_location => RAILS_ROOT + "/public/sass",
+#                          :style => :compressed,
+#                          :always_update => true}
 end
 
