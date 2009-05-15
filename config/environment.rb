@@ -8,9 +8,9 @@ Rails::Initializer.run do |config|
     
   config.frameworks -= [:action_mailer ]
   
-  config.gem 'rmagick'
-  config.gem 'hpricot', :source => "http://code.whytheluckystiff.net"
-  config.gem 'haml', :version => '2.1.0'
+  #config.gem 'rmagick'
+  #config.gem 'hpricot', :source => "http://code.whytheluckystiff.net"
+  #config.gem 'haml', :version => '2.1.0'
   
   config.action_controller.session = { :key => "_crawlr_session", :secret => "zemba is an amazing secret key!swine flu!" }
   # config.action_controller.page_cache_directory = "#{RAILS_ROOT}/public/cache"
@@ -32,13 +32,13 @@ end
 ActiveRecord::Base.partial_updates = true
 
 #HAML OPTIONS
-#Haml::Template.options = {:escape_html => true,
-#                          :ugly => true}
+Haml::Template.options = {:escape_html => true,
+                          :ugly => true}
                           
 #SASS OPTIONS
-#if ENV['RAILS_ENV'] == 'development'
-#  Sass::Plugin.options = {:template_location => RAILS_ROOT + "/public/sass",
-#                          :style => :compressed,
-#                          :always_update => true}
-#end
+if ENV['RAILS_ENV'] == 'development'
+  Sass::Plugin.options = {:template_location => RAILS_ROOT + "/public/sass",
+                          :style => :compressed,
+                          :always_update => true}
+end
 
