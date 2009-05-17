@@ -6,8 +6,7 @@ class CreateVotes < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :votes, :remote_ip
-    add_index :votes, :type
+    add_index :votes, [:gallery_id, :type], :name => 'galleries_index'
   end
 
   def self.down

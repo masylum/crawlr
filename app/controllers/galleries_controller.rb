@@ -6,40 +6,42 @@ class GalleriesController < ApplicationController
   end
   
   def show
-    gallery = Gallery.find(params[:id])
+    if request.xhr?
+      gallery = Gallery.find(params[:id])
+      tag = gallery.tag
+      
+      # check if the url is avaible
+      require 'open-uri'
+      begin
+        open(gallery.permalink)
+      rescue
+        Gallery.destroy(params[:id])
+        Rails.cache.clear
+        tag.decrement!(:galleries_count)
+        Tag.find_by_name('all').decrement!(:galleries_count)
+      end
     
-    # check if the url is avaible
-    require 'open-uri'
-    begin
-      open(gallery.permalink)
-    rescue
-      tag = Gallery.destroy(params[:id]).tag
-      Rails.cache.clear
-      tag.decrement!(:galleries_count)
-      Tag.find_by_name('all').decrement!(:galleries_count)
-      render(:text => 'error')
-      return
+      gallery.increment!(:views)
+      
+      render :text => gallery.views
+    else
+      render :file => "#{RAILS_ROOT}/public/403.html", :layout => false, :status => 403
     end
-    
-    gallery.increment!(:views)
-    
-  rescue ActiveRecord::RecordNotFound
-    render :file => "#{RAILS_ROOT}/public/403.html", :layout => false, :status => 403
   end
   
   def update
-    voted = _any_vote?
+    g = Gallery.find(params[:id])
+    voted = g.has_vote?(request.remote_ip)
+    g.increment!(:total_votes)
+    
     if voted && voted[:type] == 'Report'
       voted.update_attribute(:type, 'Milk')
-      g = Gallery.find(params[:id])
-      g.increment!(:milks)
-      g.decrement!(:reports)
     elsif !voted
       Vote.create( :gallery_id => params[:id],
                    :remote_ip => request.remote_ip,
                    :type => 'Milk')
-      Gallery.find(params[:id]).increment!(:milks)
     end
+    
     if request.xhr?
       _load_galleries_and_tags
       render(:controller => 'galleries', :action => 'index', :layout => false)
@@ -49,18 +51,17 @@ class GalleriesController < ApplicationController
   end
   
   def destroy
-    voted = _any_vote?
+    g = Gallery.find(params[:id])
+    voted = g.has_vote?(request.remote_ip)
+    g.decrement!(:total_votes)
+    
     if voted && voted[:type] == 'Milk'
       voted.update_attribute(:type, 'Report')
-      g = Gallery.find(params[:id])
-      g.increment!(:reports)
-      g.decrement!(:milks)
     elsif !voted
       Vote.create( :gallery_id => params[:id],
                    :remote_ip => request.remote_ip,
                    :type => 'Report')
-      Gallery.find(params[:id]).increment!(:reports)
-    end
+    end    
     
     if request.xhr?
       _load_galleries_and_tags
@@ -80,13 +81,7 @@ class GalleriesController < ApplicationController
     @top_galleries = Gallery.get_all(params[:parent], @current_tag, request, 1)
   end
   
-  private
-  def _any_vote?
-    Vote.find( :first,
-               :select => 'id, type',
-               :conditions => {:gallery_id => params[:id], :remote_ip => request.remote_ip})
-  end
-  
+  private  
   def _load_galleries_and_tags
     @tags = Tag.find_all
     @current_tag = Tag.find_by_name(params[:tag])

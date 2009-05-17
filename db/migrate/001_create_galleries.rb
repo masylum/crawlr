@@ -4,14 +4,13 @@ class CreateGalleries < ActiveRecord::Migration
       t.string :name, :limit => Gallery::NAME_LENGTH_RANGE.last, :null => false
       t.string :permalink, :thumbnail, :website, :null => false
       t.text :description
-      t.integer :views, :rand_id, :initial_votes, :milks, :reports, :default => 0
+      t.integer :views, :rand_id, :initial_votes, :total_votes, :default => 0
       t.boolean :enabled, :default => true
       t.references :tag, :null => false
 
       t.timestamps
     end
-    add_index :galleries, :enabled
-    add_index :galleries, :tag_id
+    add_index :galleries, [:enabled, :tag_id, :total_votes, :views, :rand_id], :name => 'galleries_index'
   end
 
   def self.down

@@ -40,5 +40,17 @@ $(function(){
     return false;
   });
   
+  // Maintain the galleries up to date
+  $('.gallery a.thumb').live("click", function(){
+    var id = $(this).parent().attr('id').split('_')[1];
+    $.ajax({
+        url: '/show/'+id,
+        dataType: 'html',
+        data:{},
+        beforeSend: function(xhr) {xhr.setRequestHeader('Accept', 'text/javascript');}
+    });
+    return false;
+  });
+  
   $('.description').fadeTo(0, 0.8);  
 });

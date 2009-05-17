@@ -1,3 +1,5 @@
+require 'capistrano_colors'
+
 set :application, "crawlr"
 set :user, "rails"
 set :use_sudo, true
@@ -29,6 +31,10 @@ namespace :deploy do
     run "mkdir -p #{shared_path}/config" 
     put '', "#{shared_path}/config/database.yml" 
   end
+end
+
+task :tail_log, :roles => :app do
+  sudo "tail -f #{shared_path}/log/#{rails_env}.log"
 end
 
 after 'deploy:setup', 'deploy:create_dbyaml'

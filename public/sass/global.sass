@@ -28,6 +28,70 @@
 !votes_width = 29px
 !votes_height = 25px
 
+
+////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////// RESET //////////////////
+*:link, *:visited
+  :text-decoration none
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td
+  :margin 0pt
+  :padding 0pt
+
+table
+  :border-collapse collapse
+  :border-spacing 0pt
+
+fieldset, img
+  :border 0pt none
+
+address, caption, cite, code, dfn, em, strong, th, var
+  :font-style normal
+  :font-weight normal
+
+ol, ul
+  :list-style-image none
+  :list-style-position outside
+  :list-style-type none
+
+caption, th
+  :text-align left
+
+h1, h2, h3, h4, h5, h6
+  :font-size 100%
+  :font-weight normal
+
+q:before, q:after
+  :content ''
+
+abbr, acronym
+  :border 0pt none
+
+strong
+  :font-weight 700
+
+body
+  :font-style normal
+  :font-variant normal
+  :font-weight normal
+  :line-height normal
+  :height 100%
+
+table
+  :font-size inherit
+
+pre, code
+  :font-family monospace
+  :font-size 115%
+  :font-style normal
+  :font-variant normal
+  :font-weight normal
+  :line-height normal
+
+body *
+  :line-height 1.22em
+  
+  
 ////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////// MIXINS //////////////////
 =hidden-text
@@ -106,6 +170,8 @@ body
       span.count
         :font-size 10px
         :color #666
+      a:visited
+        :color= !link
 
     // CONTENT
     div#content
@@ -129,8 +195,10 @@ body
             :display block
           a.thumb
             :float left
+            :width 240px
             &:hover
               :border none
+              :background none
           div.votes
             :float left
             a.vote, span.vote
@@ -164,18 +232,17 @@ body
             span.reported
               :background-position -25px -26px
           .description
-            :clear left
             :display none
             :position absolute
-            :top= 141px
+            :top 141px
             :height 46px
-            :width= !thumb_width-10px
+            :width= !thumb_width - 10px
             :padding 5px
             :z-index 2
             :font-size 11px
             :line-height 1.4em
-            :text-decoration none
-            :background #111            
+            :background #111
+            :color #fff                      
 
       // PAGINATE
       div#paginate
@@ -202,6 +269,8 @@ body
 a:link, a:visited
   :text-decoration none
   :color= !link
+a:visited
+  :color= !link - #444
 a:hover, a:active
   :background #111111
   :border-bottom 1px solid #FFFFFF
@@ -215,69 +284,3 @@ hr
 
 .clearer
   :clear both
-
-
-////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////// RESET //////////////////
-*:link, *:visited
-  :text-decoration none
-
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, p, blockquote, th, td
-  :margin 0pt
-  :padding 0pt
-
-table
-  :border-collapse collapse
-  :border-spacing 0pt
-
-fieldset, img
-  :border 0pt none
-
-address, caption, cite, code, dfn, em, strong, th, var
-  :font-style normal
-  :font-weight normal
-
-ol, ul
-  :list-style-image none
-  :list-style-position outside
-  :list-style-type none
-
-caption, th
-  :text-align left
-
-h1, h2, h3, h4, h5, h6
-  :font-size 100%
-  :font-weight normal
-
-q:before, q:after
-  :content ''
-
-abbr, acronym
-  :border 0pt none
-
-strong
-  :font-weight 700
-
-body
-  :font-family verdana,arial,helvetica,clean,sans-serif
-  :font-style normal
-  :font-variant normal
-  :font-weight normal
-  :line-height normal
-
-table
-  :font-size inherit
-
-pre, code
-  :font-family monospace
-  :font-size 115%
-  :font-style normal
-  :font-variant normal
-  :font-weight normal
-  :line-height normal
-
-body *
-  :line-height 1.22em
-
-body
-  :height 100%

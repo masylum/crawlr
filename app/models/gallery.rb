@@ -17,8 +17,7 @@ class Gallery < ActiveRecord::Base
   validates_numericality_of :views,
                             :rand_id,
                             :initial_votes,
-                            :milks,
-                            :reports,
+                            :total_votes,
                             :only_integer => true,
                             :allow_nil => true
   
@@ -37,11 +36,18 @@ class Gallery < ActiveRecord::Base
   #FUNCTIONS
   def self.find_by_tag(tag, request, page)    
     tagged_with(tag).enabled.find(:all,
-       :select => 'galleries.id, galleries.name, galleries.permalink, galleries.thumbnail, galleries.created_at, galleries.description, milks.remote_ip AS milk_ip, reports.remote_ip AS report_ip, (initial_votes+milks-reports) AS total_votes',
+       :select => 'galleries.id, galleries.name, galleries.permalink, galleries.thumbnail, galleries.created_at, galleries.description, 
+                    milks.remote_ip AS milk_ip, reports.remote_ip AS report_ip, total_votes',
        :joins => "LEFT OUTER JOIN votes AS milks ON galleries.id = milks.gallery_id AND milks.remote_ip = '#{request.remote_ip}' AND milks.type = 'milk'
                   LEFT OUTER JOIN votes AS reports ON galleries.id = reports.gallery_id AND reports.remote_ip = '#{request.remote_ip}' AND reports.type = 'report'",
        :offset => CON::GALLERIES_PER_PAGE*(page.to_i-1),
        :limit => CON::GALLERIES_PER_PAGE,
-       :order => 'total_votes DESC, rand_id, galleries.id')
+       :order => 'total_votes DESC, views DESC, rand_id DESC')
+  end
+  
+  def has_vote?(remote_ip)
+    votes.find(:first,
+               :select => 'id, type',
+               :conditions => {:remote_ip => remote_ip})
   end
 end

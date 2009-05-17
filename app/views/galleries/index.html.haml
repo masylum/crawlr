@@ -1,9 +1,9 @@
 #galleries
   -@galleries.each do |gallery| 
     .gallery{:id => "gallery_#{gallery.id}"}
-      %a{:href => galleries_show_path(gallery), :title => gallery.name, :target => '_blank', :rel => 'nofollow'}<= gallery.name.capitalize
-      
-      %a.thumb{:href => galleries_show_path(gallery), :title => gallery.name, :target => '_blank', :rel => 'nofollow'}<
+          
+      %a.thumb{:href => gallery.permalink, :title => gallery.name, :target => '_blank', :rel => 'nofollow'}<
+        =gallery.name.capitalize
         %img{:src => get_thumbnail(gallery), :alt => gallery.name, :width => CON::THUMB_WIDTH, :height => CON::THUMB_HEIGHT}
         
       .votes
@@ -18,8 +18,8 @@
           %span.vote.reported reported
         -else
           %a.vote.reportit{:href => galleries_destroy_path(:tag => params[:tag], :page => params[:page], :id => gallery), :title => "Report this gallery if you think it's ilegal or offensive"}< report
-          
+        
       .description
-        != truncate(gallery.description, 120, "...")
+        = truncate(gallery.description, :length => 120)
         
   != render :partial => 'paginate'
