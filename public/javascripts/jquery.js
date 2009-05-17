@@ -49,7 +49,6 @@ $(function(){
         data:{},
         beforeSend: function(xhr) {xhr.setRequestHeader('Accept', 'text/javascript');}
     });
-    return false;
   });
   
   $('.description').fadeTo(0, 0.8);  
