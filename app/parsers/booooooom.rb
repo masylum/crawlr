@@ -3,7 +3,7 @@ class Booooooom < Parser
     page.search("//div[@class='post']").each do |post|
       head = post.at('h2/a')
       
-      description = post.at("div").text
+      description = post.at("div/p[1]").text
       name = head.text
       permalink = head.attributes['href'].text
       image = post.at("div/p[2]//img").attributes['src'].text
