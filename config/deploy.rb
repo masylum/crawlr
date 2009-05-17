@@ -34,7 +34,26 @@ namespace :deploy do
 end
 
 task :tail_log, :roles => :app do
-  sudo "tail -f #{shared_path}/log/#{rails_env}.log"
+  sudo "tail -f #{shared_path}/log/production.log"
+end
+
+desc "Installs gems as specified in environment.rb"
+task :rake_install_gems, :roles=>:app do 
+  run "cd #{current_path}; sudo rake gems:install RAILS_ENV=production"
+end 
+
+task :install_log_rotate_script, :roles => :app do
+  rotate_script = %Q{#{shared_path}/log/production.log {
+  daily
+  rotate 14
+  size 5M
+  compress
+  create 640 rails
+  missingok
+}}
+  put rotate_script, "#{shared_path}/logrotate_script"
+  sudo "cp #{shared_path}/logrotate_script /etc/logrotate.d/#{application}"
+  run "rm -f #{shared_path}/logrotate_script"
 end
 
 after 'deploy:setup', 'deploy:create_dbyaml'
