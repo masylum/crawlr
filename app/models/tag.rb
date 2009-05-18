@@ -11,12 +11,12 @@ class Tag < ActiveRecord::Base
   #FUNCTIONS
   # update counters after each crawling
   def self.set_counters
-    find(:all, :conditions => "name != 'all'").each do |t|
+    total = 0
+    find(:all, :conditions => "name != 'all'", :include => 'galleries').each do |t|
       t.update_attribute(:galleries_count, t.galleries.length)
+      total += t.galleries.length
     end
-    find(:all, :conditions => "name = 'all'").each do |t|
-      t.update_attribute(:galleries_count, sum_counters(["name != 'all'"]))
-    end
+    find(:first, :conditions => "name = 'all'").update_attribute(:galleries_count, total)
   end
     
   # Returns a string for a SQL IN clause
@@ -35,11 +35,5 @@ class Tag < ActiveRecord::Base
     Cache::get("tag_#{name}") do
       Tag.find(:first, :conditions => ['name = ?', name])
     end
-  end
-  
-  private
-  # Sums all the galleries_count of the tags that match the conditions
-  def self.sum_counters(conditions)
-    find(:all, :conditions => conditions).inject(0) {|sum, n| sum + n.galleries_count }
   end
 end

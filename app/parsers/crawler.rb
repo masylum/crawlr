@@ -15,10 +15,16 @@ class Crawler
   
   private
   def self.crawl!
+    #Flickr groups are easy
+    FlickrGroup.new('http://www.flickr.com/groups/fashionphotographyaward/pool/', 'fashion').get_galleries
+    FlickrGroup.new('http://www.flickr.com/groups/16816959@N00/pool/', 'fashion').get_galleries
+    
+    # Booooooooooooooooooooooom
     Booooooom.new('http://www.booooooom.com/sorted/photo/', 'others').get_galleries
     Booooooom.new('http://www.booooooom.com/sorted/photo/page/2/', 'others').get_galleries
     Booooooom.new('http://www.booooooom.com/sorted/photo/page/3/', 'others').get_galleries
     Booooooom.new('http://www.booooooom.com/sorted/photo/page/4/', 'others').get_galleries
     Booooooom.new('http://www.booooooom.com/sorted/photo/page/5/', 'others').get_galleries
+    
   end
 end
