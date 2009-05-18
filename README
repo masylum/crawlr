@@ -1,8 +1,9 @@
 == Crawlr
 
-This is a simple applications that grabs content from other sites, parse them with hpricot and let the users vote it.
+This is a simple applications that grabs content from other sites, parse them with mechaize+nokogiri and let the users vote it.
 
 = Configuring Crawlr
 
-Open the app/parsers folder and create a file for each site you want to crawl. 
-You need to implement the parse_gallery method to get the name, description, permalink and image from that content.
+* Open the app/parsers folder and create a file for each site you want to crawl. 
+* You need to implement the parse_gallery method in ordr to get the name, description, permalink and image from that content.
+* Set up the new parser at app/parsers/crawler.rb.

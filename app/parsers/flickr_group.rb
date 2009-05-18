@@ -5,7 +5,7 @@ class FlickrGroup < Parser
       
       description = link.attributes['title'].text
       name = photo.search('a')[1].text
-      permalink = @url+link.attributes['href'].text
+      permalink = 'http://www.flickr.com'+link.attributes['href'].text
       image = photo.at('img').attributes['src'].text.gsub(/_t\./, '.')
       
       create_gallery(name, description, permalink, image)
